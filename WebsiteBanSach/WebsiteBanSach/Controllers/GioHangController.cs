@@ -99,6 +99,7 @@ namespace WebsiteBanSach.Controllers
             }
             ViewBag.TongSoLuong = TinhTongSoLuong();
             ViewBag.TongTien = TinhTongTien();
+            ViewBag.ExistGH = Session["GioHang"];
             return PartialView();
         }
 

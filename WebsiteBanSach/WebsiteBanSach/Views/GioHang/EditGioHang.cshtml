@@ -42,14 +42,15 @@
                                             <strong class="text-success">In stock</strong> - 24h Delivery
                                         </td>
                                         <td class="text-center">
-                                            @Html.TextBox("Quantity", item.Quantity) @item.Quantity
+                                            @Html.TextBox("Quantity", item.Quantity,new {@class="ChangedQuantity"}) @item.Quantity
+                                            <p id="TB_changedQuantity"></p>
                                             <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
                                         </td>
                                         <td class="text-right">@item.Price.ToString("#,##") VNĐ</td>
                                         <td class="text-right"><strong>@item.TotalPrice.ToString("#,##") VNĐ</strong></td>
                                         <td>
-                                            <input type="submit" value="Cập Nhật" />
+                                            <input type="submit" value="Cập Nhật" id="btnCapNhatGH"/>
                                             @Html.ActionLink("Xóa", "XoaItemGioHang", new { @_BookID = item.BookID })
                                         </td>
                                     </tr>
@@ -136,3 +137,15 @@
   
     </div>
 </section>
+
+@*kiểm tra số lượng edit không hợp lệ: không phải số hoặc nhỏ hơn 0*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $("#btnCapNhatGH").click(function () {
+        var quantity = $(".ChangedQuantity").val();
+        if (isNaN(quantity) == true || quantity < 0) {
+            $("#TB_changedQuantity").text("Số lượng không hợp lệ!");
+            return false;
+        }
+    });
+</script>

@@ -14,8 +14,15 @@ namespace WebsiteBanSach.Controllers
         // GET: UserHome
         public ActionResult Index()
         {
+            int CageID = 1;
+            var ListSach = db.Books.Where(s => s.CategoryId == CageID && s.isDelete == false);
+            if (ListSach == null)
+            {
+                return HttpNotFound();
+            }
 
-            return View();
+            return View(ListSach);
+            
         }
 
         public ActionResult LoadDanhMucSach()

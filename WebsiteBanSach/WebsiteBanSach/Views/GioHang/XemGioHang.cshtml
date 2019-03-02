@@ -23,6 +23,7 @@
                         <th class="text-center">Số Lượng</th>
                         <th class="text-right">Đơn Giá</th>
                         <th class="text-right">Thành Tiền</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,19 +35,20 @@
                             </td>
                             <td>
                                 <strong>@item.BookName</strong><br>
-                                Super Laptop 11'<br>
+                                <br>
                                 <strong class="text-success">In stock</strong> - 24h Delivery
                             </td>
                             <td class="text-center">
                                 <strong>@item.Quantity</strong>
-                                <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
+                            
                             </td>
                             <td class="text-right">@item.Price.ToString("#,##") VNĐ</td>
                             <td class="text-right"><strong>@item.TotalPrice.ToString("#,##") VNĐ</strong></td>
                             <td>
-                                @Html.ActionLink("Sửa", "EditGioHang", new { @_BookID = item.BookID })
-                                @Html.ActionLink("Xóa", "XoaItemGioHang", new { @_BookID = item.BookID })
+                                @Html.ActionLink("Sửa", "EditGioHang", new { @_BookID = item.BookID }, new {@class= "btn btn-xs btn-success" })
+                                @Html.ActionLink("Xóa", "XoaItemGioHang", new { @_BookID = item.BookID }, new { @class = "btn btn-xs btn-danger" })
+                                @*<a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Sửa"><i class="fa fa-plus"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Xóa"><i class="fa fa-minus"></i></a>*@
                             </td>
                         </tr>
                     }
@@ -89,6 +91,7 @@
                     <tr class="active">
                         <td colspan="4" class="text-right text-uppercase h4"><strong>Tổng tiền</strong></td>
                         <td class="text-right text-success h4"><strong>@ViewBag.TongTien.ToString("#,##") VNĐ</strong></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

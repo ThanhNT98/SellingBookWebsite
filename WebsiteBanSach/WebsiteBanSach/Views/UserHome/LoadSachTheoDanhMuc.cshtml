@@ -25,7 +25,9 @@
                 </div>
                 <div class="store-item-info clearfix">
                     <span class="store-item-price themed-color-dark pull-right">@item.Price.Value.ToString("#,##") VNĐ</span>
-                    <a href="ecom_product.html"><strong>@item.BookName</strong></a><br>
+                    <a href="@Url.Action("XemChiTietSach","UserHome",new {BookID=item.BookID})">
+                        <strong>@item.BookName</strong>
+                    </a><br>
                     @*Nút thêm vào giỏ hàng; request.url: lấy đường dẫn hiện tại*@
                     <small><i class="fa fa-shopping-cart text-muted"></i> <a href="@Url.Action("ThemGioHang","GioHang",new {@_BookID=item.BookID,@urlPath=Request.Url.ToString()})" class="text-muted">Add to cart</a></small>
                 </div>

@@ -10,17 +10,7 @@
         <!-- Images -->
         <div class="col-sm-6 push-bit">
             <a href="img/placeholders/photos/photo31.jpg" class="gallery-link"><img src="@Url.Content("~/Content/HinhAnhSach/"+Model.Image)" alt="" class="img-responsive push-bit"></a>
-            <div class="row push-bit">
-                <div class="col-xs-4">
-                    <a href="img/placeholders/photos/photo30.jpg" class="gallery-link"><img src="@Url.Content("~/Content/HinhAnhSach/"+Model.Image)" alt="" class="img-responsive"></a>
-                </div>
-                <div class="col-xs-4">
-                    <a href="img/placeholders/photos/photo29.jpg" class="gallery-link"><img src="@Url.Content("~/Content/HinhAnhSach/"+Model.Image)" alt="" class="img-responsive"></a>
-                </div>
-                <div class="col-xs-4">
-                    <a href="img/placeholders/photos/photo28.jpg" class="gallery-link"><img src="@Url.Content("~/Content/HinhAnhSach/"+Model.Image)" alt="" class="img-responsive"></a>
-                </div>
-            </div>
+            
         </div>
         <!-- END Images -->
         <!-- Info -->
@@ -29,19 +19,26 @@
                 <div class="pull-right">
                     <span class="h2"><strong>@Model.Price.Value.ToString("#,##") VNĐ</strong></span>
                 </div>
-                <span class="h4"><strong class="text-success">@Model.BookName</strong><br><small>Có sẵn @Model.Quantity cuốn sách</small></span>
+                <span class="h4"><strong class="text-success">@Model.BookName</strong><br><br /><br /><small>Có sẵn @Model.Quantity cuốn sách</small></span>
             </div>
             <hr>
             <p>Tác Giả: @Model.Author</p>
             <p>Nhà Xuất Bản: @Model.Publisher</p>
             <p>Ngày Phát Hành: @Model.PublishDate</p>
             
-            <p>Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci.</p>
+            
             <hr>
-            <form action="ecom_shopping_cart.html" method="post" class="form-inline push-bit text-right">
+            
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new {@class="form-inline push-bit text-right"}))
+                {
+                    @*Nút thêm vào giỏ hàng; request.url: lấy đường dẫn hiện tại*@
 
-                <button type="submit" class="btn btn-primary">Add to Cart</button>
-            </form>
+                    @Html.Hidden("_BookID", Model.BookID)
+                    @Html.Hidden("urlPath", Request.Url.ToString())
+                    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                }
+
+            
         </div>
         <!-- END Info -->
         <!-- More Info Tabs -->

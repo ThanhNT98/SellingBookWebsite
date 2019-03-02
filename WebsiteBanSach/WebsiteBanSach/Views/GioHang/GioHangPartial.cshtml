@@ -1,12 +1,24 @@
 ﻿@*Dùng Viewbag để lấy tổng số lượng và tổng tiền*@
 <div class="sidebar-block">
     <div class="row">
-        <div class="col-xs-6 push-bit">
-            <span class="h3">@ViewBag.TongTien.ToString("#,##") VNĐ<br><small><em>@ViewBag.TongSoLuong Cuốn sách</em></small></span>
-        </div>
+        @*khi chưa tồn tại giỏ hàng thì tổng tiền phải hiển thị 0VND*@
+        @if (ViewBag.ExistGH == null)
+        {
+            <div class="col-xs-6 push-bit">
+                <span class="h4">0 VNĐ<br><small><em>@ViewBag.TongSoLuong Cuốn sách</em></small></span>
+            </div>
+        }
+        else
+        {
+
+            <div class="col-xs-6 push-bit">
+                <span class="h4">@ViewBag.TongTien.ToString("#,##") VNĐ<br><small><em>@ViewBag.TongSoLuong Cuốn sách</em></small></span>
+            </div>
+        }
+
         <div class="col-xs-6">
             <a href="@Url.Action("XemGioHang","GioHang")" class="btn btn-sm btn-block btn-success">Xem giỏ hàng</a>
-            <a href="ecom_checkout.html" class="btn btn-sm btn-block btn-danger">CHECKOUT</a>
+            
         </div>
     </div>
 </div>
