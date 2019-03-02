@@ -1,0 +1,138 @@
+﻿@using WebsiteBanSach.Models
+@model ItemGioHang
+@{
+    ViewBag.Title = "EditGioHang";
+    Layout = "~/Views/Layout/GioHangLayOut.cshtml";
+}
+
+@{
+    List<ItemGioHang> GioHang = ViewBag.GioHang as List<ItemGioHang>;
+}
+
+<section class="site-content site-section">
+    <div class="container">
+        
+            <div class="table-responsive">
+                <table class="table table-bordered table-vcenter">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Sách</th>
+                            <th class="text-center">Số Lượng</th>
+                            <th class="text-right">Đơn Giá</th>
+                            <th class="text-right">Thành Tiền</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in GioHang)
+                        {
+                            @*Sách có mã sách đc chỉnh sửa từ tham số bên trang xem giỏ hàng*@
+                            if (Model.BookID == item.BookID)
+                            {
+                                using (Html.BeginForm("CapNhatGioHang", "GioHang"))
+                                {
+                                    <tr>
+                                        <td style="width: 200px;">
+                                            <img src="@Url.Content("~/Content/HinhAnhSach/" + item.Image)" alt="" style="width: 180px;">
+                                        </td>
+                                        <td>
+                                            <strong>@item.BookName @Html.Hidden("BookID",item.BookID)</strong><br>
+                                            Super Laptop 11'<br>
+                                            <strong class="text-success">In stock</strong> - 24h Delivery
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.TextBox("Quantity", item.Quantity) @item.Quantity
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
+                                        </td>
+                                        <td class="text-right">@item.Price.ToString("#,##") VNĐ</td>
+                                        <td class="text-right"><strong>@item.TotalPrice.ToString("#,##") VNĐ</strong></td>
+                                        <td>
+                                            <input type="submit" value="Cập Nhật" />
+                                            @Html.ActionLink("Xóa", "XoaItemGioHang", new { @_BookID = item.BookID })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td style="width: 200px;">
+                                        <img src="@Url.Content("~/Content/HinhAnhSach/" + item.Image)" alt="" style="width: 180px;">
+                                    </td>
+                                    <td>
+                                        <strong>@item.BookName</strong><br>
+                                        Super Laptop 11'<br>
+                                        <strong class="text-success">In stock</strong> - 24h Delivery
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>@item.Quantity</strong>
+                                        <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
+                                    </td>
+                                    <td class="text-right">@item.Price.ToString("#,##") VNĐ</td>
+                                    <td class="text-right"><strong> @item.TotalPrice.ToString("#,##")VNĐ</strong></td>
+                                    <td>
+                                        @Html.ActionLink("Sửa", "EditGioHang", new { @_BookID = item.BookID })
+                                        @Html.ActionLink("Xóa", "XoaItemGioHang", new { @_BookID = item.BookID })
+                                    </td>
+                                </tr>
+
+                            }
+
+                        }
+
+                        @*<tr>
+            <td>
+                <img src="img/placeholders/photos/photo32.jpg" alt="" style="width: 180px;">
+            </td>
+            <td>
+                <strong>PID.6215</strong><br>
+                White Headset<br>
+                <strong class="text-success">In stock</strong> - 24h Delivery
+            </td>
+            <td class="text-center">
+                <strong>1</strong>
+                <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
+                <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
+            </td>
+            <td class="text-right">$59,00</td>
+            <td class="text-right"><strong>$59,00</strong></td>
+        </tr>*@
+                        @*<tr>
+            <td>
+                <img src="img/placeholders/photos/photo34.jpg" alt="" style="width: 180px;">
+            </td>
+            <td>
+                <strong>PID.9874</strong><br>
+                Bluetooth<br>
+                <strong class="text-success">In stock</strong> - 24h Delivery
+            </td>
+            <td class="text-center">
+                <strong>1</strong>
+                <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
+                <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
+            </td>
+            <td class="text-right">$49,00</td>
+            <td class="text-right"><strong>$49,00</strong></td>
+        </tr>*@
+
+                        <tr class="active">
+                            <td colspan="4" class="text-right text-uppercase h4"><strong>Tổng tiền</strong></td>
+                            <td class="text-right text-success h4"><strong>@ViewBag.TongTien.ToString("#,##") VNĐ</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xs-7 col-md-3">
+                    <a href="ecom_product_list.html" class="btn btn-block btn-primary">Continue Shopping</a>
+                </div>
+                <div class="col-xs-5 col-md-3 col-md-offset-6">
+                    <a href=ecom_checkout.html class="btn btn-block btn-danger">Checkout</a>
+                </div>
+            </div>
+  
+    </div>
+</section>

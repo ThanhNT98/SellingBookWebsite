@@ -1,0 +1,16 @@
+﻿@using WebsiteBanSach.Models
+@model IEnumerable<Category>
+
+<div class="sidebar-block">
+    <ul class="store-menu">
+
+
+        @foreach (var item in Model)
+        {
+            <li><a href="@Url.Action("LoadSachTheoDanhMuc","UserHome",new {CageID=item.CategoryID})">@item.CategoryName</a></li>
+        }
+
+
+
+    </ul>
+</div>

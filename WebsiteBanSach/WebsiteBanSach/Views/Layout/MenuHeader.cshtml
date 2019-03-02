@@ -1,0 +1,377 @@
+﻿@using WebsiteBanSach.Models;
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>@*Ta hờn ngươi huhu*@
+
+<header>
+    <div class="container">
+        <!-- Site Logo -->
+        <a href="index.html" class="site-logo">
+            <i class="gi gi-flash"></i> <strong>Pro</strong>UI
+        </a>
+        <!-- Site Logo -->
+        <!-- Site Navigation -->
+        <nav>
+            <!-- Menu Toggle -->
+            <!-- Toggles menu on small screens -->
+            <a href="javascript:void(0)" class="btn btn-default site-menu-toggle visible-xs visible-sm">
+                <i class="fa fa-bars"></i>
+            </a>
+            <!-- END Menu Toggle -->
+            <!-- Main Menu -->
+            <ul class="site-nav">
+                <!-- Toggles menu on small screens -->
+                <li class="visible-xs visible-sm">
+                    <a href="javascript:void(0)" class="site-menu-toggle text-center">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </li>
+                <!-- END Menu Toggle -->
+                <li>
+                    <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Home</a>
+                    <ul>
+                        <li>
+                            <a href="index.html">Full Width</a>
+                        </li>
+                        <li>
+                            <a href="index_alt.html">Full Width (Dark)</a>
+                        </li>
+                        <li>
+                            <a href="index_parallax.html">Full Width Parallax</a>
+                        </li>
+                        <li>
+                            <a href="index_video.html">Full Width Video</a>
+                        </li>
+                        <li>
+                            <a href="index_boxed.html">Boxed</a>
+                        </li>
+                        <li>
+                            <a href="index_boxed_alt.html">Boxed (Dark)</a>
+                        </li>
+                        <li>
+                            <a href="index_boxed_parallax.html">Boxed Parallax</a>
+                        </li>
+                        <li>
+                            <a href="index_boxed_video.html">Boxed Video</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Pages</a>
+                    <ul>
+                        <li>
+                            <a href="blog.html">Blog</a>
+                        </li>
+                        <li>
+                            <a href="blog_post.html">Blog Post</a>
+                        </li>
+                        <li>
+                            <a href="portfolio_4.html">Portfolio 4 Columns</a>
+                        </li>
+                        <li>
+                            <a href="portfolio_3.html">Portfolio 3 Columns</a>
+                        </li>
+                        <li>
+                            <a href="portfolio_2.html">Portfolio 2 Columns</a>
+                        </li>
+                        <li>
+                            <a href="portfolio_single.html">Portfolio Single</a>
+                        </li>
+                        <li>
+                            <a href="team.html">Team</a>
+                        </li>
+                        <li>
+                            <a href="helpdesk.html">Helpdesk</a>
+                        </li>
+                        <li>
+                            <a href="jobs.html">Jobs</a>
+                        </li>
+                        <li>
+                            <a href="how_it_works.html">How it works</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>eCommerce</a>
+                    <ul>
+                        <li>
+                            <a href="ecom_home.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="ecom_search_results.html">Search Results</a>
+                        </li>
+                        <li>
+                            <a href="ecom_product_list.html" class="active">Product List</a>
+                        </li>
+                        <li>
+                            <a href="ecom_product.html">Product</a>
+                        </li>
+                        <li>
+                            <a href="ecom_product_comparison.html">Product Comparison</a>
+                        </li>
+                        <li>
+                            <a href="ecom_shopping_cart.html">Shopping Cart</a>
+                        </li>
+                        <li>
+                            <a href="ecom_checkout.html">Checkout</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="features.html">Features</a>
+                </li>
+                <li>
+                    <a href="pricing.html">Pricing</a>
+                </li>
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                @if (Session["Current_User"] != null)
+                {
+                    Customer cus = (Customer)Session["Current_User"];
+                    <li>Xin chào @cus.CusName! </li>
+                    <li>
+                        @Html.ActionLink("Đăng xuất", "DangXuat", "UserHome", new { @class = "btn btn-primary" })
+                        @*<a href="#" class="btn btn-primary" id="btnDangNhap">Log In</a>*@
+                    </li>
+
+                }
+                else
+                {
+                    <li>
+                        <a href="#" class="btn btn-primary" id="btnDangNhap">Đăng Nhập</a>
+                    </li>
+                    <li>
+                        <a href="signup.html" class="btn btn-success">Sign Up</a>
+                    </li>
+                }
+
+
+
+
+            </ul>
+            <!-- END Main Menu -->
+        </nav>
+        <!-- END Site Navigation -->
+    </div>
+</header>
+
+
+<link rel="shortcut icon" href="~/Content/AllForAdmin/img/favicon.png">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon57.png" sizes="57x57">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon72.png" sizes="72x72">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon76.png" sizes="76x76">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon114.png" sizes="114x114">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon120.png" sizes="120x120">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon144.png" sizes="144x144">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon152.png" sizes="152x152">
+<link rel="apple-touch-icon" href="~/Content/AllForAdmin/img/icon180.png" sizes="180x180">
+<!-- END Icons -->
+<!-- Stylesheets -->
+<!-- Bootstrap is included in its original form, unaltered -->
+<link rel="stylesheet" href="~/Content/AllForAdmin/css/bootstrap.min.css">
+
+<!-- Related styles of various icon packs and plugins -->
+<link rel="stylesheet" href="~/Content/AllForAdmin/css/plugins.css">
+
+<!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+<link rel="stylesheet" href="~/Content/AllForAdmin/css/main.css">
+
+<!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+<!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+<link rel="stylesheet" href="~/Content/AllForAdmin/css/themes.css">
+<!-- END Stylesheets -->
+<!-- Modernizr (browser feature detection library) -->
+
+<script src="~/Content/AllForAdmin/js/vendor/modernizr.min.js"></script>
+
+
+<div id="popup_login">
+
+    <div id="login-container" class="animation-fadeIn">
+        <!-- Login Title -->
+        <div style="clear:both;text-align:right;margin-bottom:0;">
+            <span id="close-form" class="btn btn-danger">X</span>
+        </div>
+        <div class="login-title text-center">
+            <h1><i class="gi gi-flash"></i> <strong>ProUI</strong><br><small>Please <strong>Login</strong> or <strong>Register</strong></small></h1>
+        </div>
+        <!-- END Login Title -->
+        <!-- Login Block -->
+        <div class="block push-bit">
+            <!-- Login Form -->
+            <form action="/UserHome/DangNhap" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless" novalidate="novalidate">
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                            <input type="text" id="login-email" name="txtUsername" class="form-control input-lg" placeholder="Tên Đăng Nhập">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                            <input type="password" id="login-password" name="txtPassword" class="form-control input-lg" placeholder="Mật Khẩu">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-actions">
+                    <div class="col-xs-4">
+                        <label class="switch switch-primary" data-toggle="tooltip" title="" data-original-title="Remember Me?">
+                            <input type="checkbox" id="login-remember-me" name="login-remember-me" checked="">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnDangNhap1"><i class="fa fa-angle-right"></i> Đăng Nhập</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> -
+                        <a href="javascript:void(0)" id="link-register-login"><small>Create a new account</small></a>
+                    </div>
+                </div>
+            </form>
+            <!-- END Login Form -->
+            <!-- Reminder Form -->
+            @*<form action="login_full.html#reminder" method="post" id="form-reminder" class="form-horizontal form-bordered form-control-borderless display-none" novalidate="novalidate">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                                <input type="text" id="reminder-email" name="reminder-email" class="form-control input-lg" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Reset Password</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12 text-center">
+                            <small>Did you remember your password?</small> <a href="javascript:void(0)" id="link-reminder"><small>Login</small></a>
+                        </div>
+                    </div>
+                </form>*@
+            <!-- END Reminder Form -->
+            <!-- Register Form -->
+            @*<form action="login_full.html#register" method="post" id="form-register" class="form-horizontal form-bordered form-control-borderless display-none" novalidate="novalidate">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-user"></i></span>
+                                <input type="text" id="register-firstname" name="register-firstname" class="form-control input-lg" placeholder="Firstname">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" id="register-lastname" name="register-lastname" class="form-control input-lg" placeholder="Lastname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                                <input type="text" id="register-email" name="register-email" class="form-control input-lg" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                                <input type="password" id="register-password" name="register-password" class="form-control input-lg" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                                <input type="password" id="register-password-verify" name="register-password-verify" class="form-control input-lg" placeholder="Verify Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        <div class="col-xs-6">
+                            <a href="#modal-terms" data-toggle="modal" class="register-terms">Terms</a>
+                            <label class="switch switch-primary" data-toggle="tooltip" title="" data-original-title="Agree to the terms">
+                                <input type="checkbox" id="register-terms" name="register-terms">
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Register Account</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12 text-center">
+                            <small>Do you have an account?</small> <a href="javascript:void(0)" id="link-register"><small>Login</small></a>
+                        </div>
+                    </div>
+                </form>*@
+            <!-- END Register Form -->
+        </div>
+        <!-- END Login Block -->
+    </div>
+</div>
+
+
+@*sử dụng jquey hiển thị login form*@
+<script type="text/javascript">
+    //hiển thị
+
+    $("#btnDangNhap").click(function () {
+        //$("#popup_login").css("display", "block");
+        $("#popup_login").show();
+        //$("#popup_login").slideDown();
+    });
+
+    //ẩn form
+    $("#close-form").click(AnForm);
+
+    //viết function ở ngoài
+    function AnForm() {
+        $("#popup_login").hide();
+    }
+
+    //lấy giá trị từ texbox
+    //$("#btnDangNhap1").click(function() {
+    //    var taiKhoan = $(".taiKhoan").val();
+    //    var matkhau = $(".matKhau").val();
+    //    alert("Tai Khoan: " + taiKhoan + "\n Mat Khau: " + matkhau);
+    //});
+</script>
+<style>
+
+    #popup_login {
+        position: fixed;
+        background-color: rgba(0,0,0,.9);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        display:none;
+    }
+</style>
+
+
+
+<!--jQuery, Bootstrap.js, jQuery plugins and Custom JS code-->
+@*<script src="~/Content/AllForAdmin/js/vendor/jquery.min.js"></script>
+    <script src="~/Content/AllForAdmin/js/vendor/bootstrap.min.js"></script>
+    <script src="~/Content/AllForAdmin/js/plugins.js"></script>
+    <script src="~/Content/AllForAdmin/js/app.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Content/AllForAdmin/js/pages/login.js"></script>
+    <script>$(function () { Login.init(); });</script>*@
