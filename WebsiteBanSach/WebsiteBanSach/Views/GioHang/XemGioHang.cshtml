@@ -4,112 +4,114 @@
     ViewBag.Title = "XemGioHang";
     Layout = "~/Views/Layout/GioHangLayOut.cshtml";
 }
-
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <section class="site-content site-section">
     <div class="container">
-        @if (Model.Count==0)
+        @if (Model.Count == 0)
         {
             <div>
-                <h1 style="color:red" >Chưa có sản phẩm trong giỏ hàng ^^</h1>
+                <h1 style="color:red">Chưa có sản phẩm trong giỏ hàng ^^</h1>
             </div>
         }
         else
         {
             <div class="table-responsive">
-            <table class="table table-bordered table-vcenter">
-                <thead>
-                    <tr>
-                        <th colspan="2">Sách</th>
-                        <th class="text-center">Số Lượng</th>
-                        <th class="text-right">Đơn Giá</th>
-                        <th class="text-right">Thành Tiền</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+                <table class="table table-bordered table-vcenter">
+                    <thead>
                         <tr>
-                            <td style="width: 200px;">
-                                <img src="@Url.Content("~/Content/HinhAnhSach/" + item.Image)" alt="" style="width: 180px;">
-                            </td>
-                            <td>
-                                <strong>@item.BookName</strong><br>
-                                <br>
-                                <strong class="text-success">In stock</strong> - 24h Delivery
-                            </td>
-                            <td class="text-center">
-                                <strong>@item.Quantity</strong>
-                            
-                            </td>
-                            <td class="text-right">@item.Price.ToString("#,##") VNĐ</td>
-                            <td class="text-right"><strong>@item.TotalPrice.ToString("#,##") VNĐ</strong></td>
-                            <td>
-                                @Html.ActionLink("Sửa", "EditGioHang", new { @_BookID = item.BookID }, new {@class= "btn btn-xs btn-success" })
-                                @Html.ActionLink("Xóa", "XoaItemGioHang", new { @_BookID = item.BookID }, new { @class = "btn btn-xs btn-danger" })
-                                @*<a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Sửa"><i class="fa fa-plus"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Xóa"><i class="fa fa-minus"></i></a>*@
-                            </td>
+                            <th colspan="2">Sách</th>
+                            <th class="text-center">Số Lượng</th>
+                            <th class="text-right">Đơn Giá</th>
+                            <th class="text-right">Thành Tiền</th>
+                            <th></th>
                         </tr>
-                    }
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="width: 200px;">
+                                    <img src="@Url.Content("~/Content/HinhAnhSach/" + item.Image)" alt="" style="width: 180px;">
+                                </td>
+                                <td>
+                                    <strong>@item.BookName</strong><br>
+                                    <br>
+                                    <strong class="text-success">In stock</strong> - 24h Delivery
+                                </td>
+                                <td class="text-center">
+                                    <strong>@item.Quantity</strong>
 
-                    @*<tr>
-            <td>
-                <img src="img/placeholders/photos/photo32.jpg" alt="" style="width: 180px;">
-            </td>
-            <td>
-                <strong>PID.6215</strong><br>
-                White Headset<br>
-                <strong class="text-success">In stock</strong> - 24h Delivery
-            </td>
-            <td class="text-center">
-                <strong>1</strong>
-                <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
-                <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
-            </td>
-            <td class="text-right">$59,00</td>
-            <td class="text-right"><strong>$59,00</strong></td>
-        </tr>*@
-                    @*<tr>
-            <td>
-                <img src="img/placeholders/photos/photo34.jpg" alt="" style="width: 180px;">
-            </td>
-            <td>
-                <strong>PID.9874</strong><br>
-                Bluetooth<br>
-                <strong class="text-success">In stock</strong> - 24h Delivery
-            </td>
-            <td class="text-center">
-                <strong>1</strong>
-                <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
-                <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
-            </td>
-            <td class="text-right">$49,00</td>
-            <td class="text-right"><strong>$49,00</strong></td>
-        </tr>*@
-                    
-                    <tr class="active">
-                        <td colspan="4" class="text-right text-uppercase h4"><strong>Tổng tiền</strong></td>
-                        <td class="text-right text-success h4"><strong>@ViewBag.TongTien.ToString("#,##") VNĐ</strong></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row">
-            <div class="col-xs-7 col-md-3">
-                <a href="/UserHome/Index" class="btn btn-block btn-primary">Tiếp tục mua hàng</a>
-                @*@Html.ActionLink("Tiếp tục mua hàng","Index","UserHome",new {@class= "btn btn-block btn-primary"})*@
+                                </td>
+                                <td class="text-right">@item.Price.ToString("#,##") VNĐ</td>
+                                <td class="text-right"><strong>@item.TotalPrice.ToString("#,##") VNĐ</strong></td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "EditGioHang", new { @_BookID = item.BookID }, new { @class = "btn btn-xs btn-success" })
+                                    @Html.ActionLink("Xóa", "XoaItemGioHang", new { @_BookID = item.BookID }, new { @class = "btn btn-xs btn-danger" })
+                                    @*<a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Sửa"><i class="fa fa-plus"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Xóa"><i class="fa fa-minus"></i></a>*@
+                                </td>
+                            </tr>
+                        }
+
+                        @*<tr>
+                                <td>
+                                    <img src="img/placeholders/photos/photo32.jpg" alt="" style="width: 180px;">
+                                </td>
+                                <td>
+                                    <strong>PID.6215</strong><br>
+                                    White Headset<br>
+                                    <strong class="text-success">In stock</strong> - 24h Delivery
+                                </td>
+                                <td class="text-center">
+                                    <strong>1</strong>
+                                    <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
+                                </td>
+                                <td class="text-right">$59,00</td>
+                                <td class="text-right"><strong>$59,00</strong></td>
+                            </tr>*@
+                        @*<tr>
+                                <td>
+                                    <img src="img/placeholders/photos/photo34.jpg" alt="" style="width: 180px;">
+                                </td>
+                                <td>
+                                    <strong>PID.9874</strong><br>
+                                    Bluetooth<br>
+                                    <strong class="text-success">In stock</strong> - 24h Delivery
+                                </td>
+                                <td class="text-center">
+                                    <strong>1</strong>
+                                    <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Add"><i class="fa fa-plus"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove"><i class="fa fa-minus"></i></a>
+                                </td>
+                                <td class="text-right">$49,00</td>
+                                <td class="text-right"><strong>$49,00</strong></td>
+                            </tr>*@
+
+                        <tr class="active">
+                            <td colspan="4" class="text-right text-uppercase h4"><strong>Tổng tiền</strong></td>
+                            <td class="text-right text-success h4"><strong>@ViewBag.TongTien.ToString("#,##") VNĐ</strong></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            @using (Html.BeginForm("DatHang", "GioHang"))
-            {
-            <div class="col-xs-5 col-md-3 col-md-offset-6">
-                @*<a href=ecom_checkout.html class="btn btn-block btn-danger">Đặt Hàng</a>*@
-                <input type="submit" value="Đặt hàng" class="btn btn-block btn-danger"/>
+            <div class="row">
+                <div class="col-xs-7 col-md-3">
+                    <a href="/UserHome/Index" class="btn btn-block btn-primary">Tiếp tục mua hàng</a>
+                    @*@Html.ActionLink("Tiếp tục mua hàng","Index","UserHome",new {@class= "btn btn-block btn-primary"})*@
+                </div>
+                @using (Html.BeginForm("DatHang", "GioHang"))
+                {
+                    <div class="col-xs-5 col-md-3 col-md-offset-6">
+                        @*<a href=ecom_checkout.html class="btn btn-block btn-danger">Đặt Hàng</a>*@
+                        <input type="submit" value="Đặt hàng" class="btn btn-block btn-danger" id="btnDatHang"/>
+                    </div>
+                }
             </div>
-            }
-        </div>
         }
     </div>
 </section>
+
+
 

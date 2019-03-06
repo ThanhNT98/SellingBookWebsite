@@ -87,7 +87,7 @@ namespace WebsiteBanSach.Controllers
             return gioHang.Sum(itemGH => itemGH.TotalPrice);
         }
 
-        //để sau này dùng ajax dễ quản lý
+        //dùng ajax dễ render
         public ActionResult GioHangPartial()
         {
             //mang tổng số lượng và tổng tiền qua trang partial
@@ -202,30 +202,79 @@ namespace WebsiteBanSach.Controllers
                 return RedirectToAction("Index", "UserHome");
             }
 
+            
             //thêm đơn đặt hàng
             DonDatHang ddh = new DonDatHang();
-            ddh.OrderDate = DateTime.Now;
-            ddh.isDelivered = false;
-            ddh.isPaid = false;
-            ddh.isCanceled = false;
-            ddh.isDeleted = false;
-            db.DonDatHangs.Add(ddh);
-            db.SaveChanges();
-            //chi tiết đơn đặt hàng(cart)
-            List<ItemGioHang> listGH = LayGioHang();
-            foreach (var item in listGH)
-            {
-                Cart ctdh = new Cart();
-                ctdh.DDH_ID = ddh.DDH_ID;
-                ctdh.BookID = item.BookID;
-                ctdh.BookName = item.BookName;
-                ctdh.Quantity = item.Quantity;
-                ctdh.Price =double.Parse(item.Price.ToString());
-                db.Carts.Add(ctdh);
-            }
-            db.SaveChanges();
-            Session["GioHang"] = null;
+                ddh.OrderDate = DateTime.Now;
+                ddh.isDelivered = false;
+                ddh.isPaid = false;
+                ddh.isCanceled = false;
+                ddh.isDeleted = false;
+                db.DonDatHangs.Add(ddh);
+                db.SaveChanges();
+                //chi tiết đơn đặt hàng(cart)
+                List<ItemGioHang> listGH = LayGioHang();
+                foreach (var item in listGH)
+                {
+                    Cart ctdh = new Cart();
+                    ctdh.DDH_ID = ddh.DDH_ID;
+                    ctdh.BookID = item.BookID;
+                    ctdh.BookName = item.BookName;
+                    ctdh.Quantity = item.Quantity;
+                    ctdh.Price = double.Parse(item.Price.ToString());
+                    db.Carts.Add(ctdh);
+                }
+                db.SaveChanges();
+                Session["GioHang"] = null;
+
+
+            
             return RedirectToAction("XemGioHang"); 
+        }
+
+
+        //them gio hang bang ajax
+        public ActionResult ThemGioHangAjax(int _BookID, string urlPath)
+        {
+            //kiểm tra sách có tồn tại trong CSDL không
+            Book book = db.Books.Single(s => s.BookID == _BookID);
+            //nếu sách k tồn tại >> đưa về trang 404
+            if (book == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            //nếu tồn tại >> lấy giỏ hàng ra
+            List<ItemGioHang> listGioHang = LayGioHang();
+            //1: sách đã có trong giỏ hàng
+            ItemGioHang isExistedBook = listGioHang.SingleOrDefault(s => s.BookID == _BookID);
+            if (isExistedBook != null)
+            {
+                //kiểm tra số lượng tồn <= số lượng trong giỏ hàng
+                if (book.Quantity < isExistedBook.Quantity)
+                {
+                    return Content("<script> alert(\"Sản phẩm đã hết hàng!\") </script>");
+                }
+                isExistedBook.Quantity++;
+                isExistedBook.TotalPrice = isExistedBook.Quantity * isExistedBook.Price;
+                //render 1 phan
+                //ViewBag.TongSoLuong = TinhTongSoLuong();
+                //ViewBag.TongTien = TinhTongTien();
+                return RedirectToAction("GioHangPartial");
+            }
+            //2: sách chưa có trong giỏ >> thêm sách mới với số lượng =1
+
+            ItemGioHang itemGH = new ItemGioHang(_BookID);
+            if (book.Quantity <= itemGH.Quantity)
+            {
+                return Content("<script> alert(\"Sản phẩm đã hết hàng!\") </script>");
+            }
+            listGioHang.Add(itemGH);
+            //render 1 phan
+            //ViewBag.TongSoLuong = TinhTongSoLuong();
+            //ViewBag.TongTien = TinhTongTien();
+            return RedirectToAction("GioHangPartial");
+
         }
     }
 }

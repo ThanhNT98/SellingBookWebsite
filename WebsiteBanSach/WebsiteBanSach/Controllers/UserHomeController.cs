@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebsiteBanSach.Models;
+using PagedList;
 
 namespace WebsiteBanSach.Controllers
 {
@@ -31,7 +32,7 @@ namespace WebsiteBanSach.Controllers
             return PartialView(DanhMucSachList);
         }
 
-        public ActionResult LoadSachTheoDanhMuc(int? CageID)//dâu hỏi vì int 32 hoặc int 64
+        public ActionResult LoadSachTheoDanhMuc(int? CageID, int? Page)//dâu hỏi vì int 32 hoặc int 64; page: trang hiên tại
         {
             
             if (CageID == null)
@@ -43,8 +44,11 @@ namespace WebsiteBanSach.Controllers
             {
                 return HttpNotFound();
             }
-
-            return View(ListSach);
+            //phân trang bằng thư viện pagedlist
+            int pageSize = 4;
+            int pageNumber = (Page ?? 1);//phép gán: nếu Page k chưa giá trị thì mặc định bằng 1
+            ViewBag.CageID = CageID;
+            return View(ListSach.OrderBy(s=>s.CategoryId).ToPagedList(pageNumber,pageSize));
         }
 
         public ActionResult XemChiTietSach(int? BookID)
@@ -62,7 +66,7 @@ namespace WebsiteBanSach.Controllers
             return View(Sach);
         }
 
-        [HttpPost]
+     
         public ActionResult DangNhap(FormCollection f)
         {
             string Username = f["txtUsername"].ToString();

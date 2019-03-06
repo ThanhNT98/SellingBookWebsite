@@ -1,5 +1,6 @@
-﻿@*Dùng Viewbag để lấy tổng số lượng và tổng tiền*@
-<div class="sidebar-block">
+﻿
+@*Dùng Viewbag để lấy tổng số lượng và tổng tiền*@
+<div class="sidebar-block" id="divGioHang">
     <div class="row">
         @*khi chưa tồn tại giỏ hàng thì tổng tiền phải hiển thị 0VND*@
         @if (ViewBag.ExistGH == null)

@@ -166,3 +166,7 @@ C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\Websi
 C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\WebsiteBanSach\obj\Debug\WebsiteBanSach.csproj.CopyComplete
 C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\WebsiteBanSach\obj\Debug\WebsiteBanSach.dll
 C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\WebsiteBanSach\obj\Debug\WebsiteBanSach.pdb
+C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\WebsiteBanSach\bin\PagedList.dll
+C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\WebsiteBanSach\bin\PagedList.Mvc.dll
+C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\WebsiteBanSach\bin\PagedList.xml
+C:\Users\PC\Desktop\WebBanSach_C#Project\SellingBookWebsite\WebsiteBanSach\WebsiteBanSach\bin\PagedList.Mvc.xml

@@ -1,13 +1,16 @@
 ﻿@using WebsiteBanSach.Models
-@model IEnumerable<Book>
+@using PagedList.Mvc;
+@*Class giúp hiển thị sản phẩm tương ứng với số trang*@
+@model PagedList.IPagedList<Book>
 @{
     ViewBag.Title = "LoadSachTheoDanhMuc";
     Layout = "~/Views/Layout/MainUserLayout.cshtml";
 }
-
+<!-- ajax -->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <div class="row store-items">
 
-    @foreach (var item  in Model)
+    @foreach (var item in Model)
     {
         <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
             <div class="store-item">
@@ -29,8 +32,10 @@
                         <strong>@item.BookName</strong>
                     </a><br>
                     @*Nút thêm vào giỏ hàng; request.url: lấy đường dẫn hiện tại*@
-                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="@Url.Action("ThemGioHang","GioHang",new {@_BookID=item.BookID,@urlPath=Request.Url.ToString()})" class="text-muted">Add to cart</a></small>
+                        <small><i class="fa fa-shopping-cart text-muted"></i>  @Ajax.ActionLink("Thêm vào giỏ hàng", "ThemGioHangAjax", "GioHang", new { @_BookID = item.BookID, @urlPath = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "get", UpdateTargetId = "divGioHang", InsertionMode = InsertionMode.Replace }, new {@class="text-muted" })</small>
+
                 </div>
+                
             </div>
         </div>
     }
@@ -141,5 +146,15 @@
                 </div>
             </div>
         </div>*@
+</div>
+
+<div class="dlink" style="margin-right:0;">
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+    @*PagedListPager:Tách sản phẩm thành nhiều trang
+       Model: list sách mỗi trang(4)
+       page: trỏ tới link ở trang kế tiếp 
+    *@
+    @Html.PagedListPager(Model, pageID => Url.Action("LoadSachTheoDanhMuc", new { Page = pageID, @CageID=ViewBag.CageID}))
 </div>
 
