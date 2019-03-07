@@ -25,11 +25,12 @@ namespace WebsiteBanSach.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DonDatHang> DonDatHangs { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Author> Authors { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
     }
 }

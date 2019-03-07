@@ -21,7 +21,7 @@ namespace WebsiteBanSach.Models
         public Nullable<double> Price { get; set; }
         public Nullable<int> DDH_ID { get; set; }
     
-        public virtual Book Book { get; set; }
         public virtual DonDatHang DonDatHang { get; set; }
+        public virtual Book Book { get; set; }
     }
 }

@@ -145,6 +145,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Author.cs">
+      <DependentUpon>WebsiteBanSachModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Book.cs">
       <DependentUpon>WebsiteBanSachModels.tt</DependentUpon>
     </Compile>
@@ -1111,6 +1114,7 @@
     <Content Include="Views\GioHang\GioHangPartial.cshtml" />
     <Content Include="Views\GioHang\ThongBao.cshtml" />
     <Content Include="Views\GioHang\EditGioHang.cshtml" />
+    <Content Include="Views\UserHome\LoadSachTheoDanhMucVaTacGia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

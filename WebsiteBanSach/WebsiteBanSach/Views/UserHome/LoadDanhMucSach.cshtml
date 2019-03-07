@@ -1,16 +1,31 @@
 ﻿@using WebsiteBanSach.Models
-@model IEnumerable<Category>
+@model IEnumerable<Book>
+
+
 
 <div class="sidebar-block">
-    <ul class="store-menu">
+        <ul class="store-menu">
+            @foreach (var CategoryGroup in Model.GroupBy(category=>category.Category))
+            {
+                <li id="DanhMucSach">
+                    
+                    <a href="@Url.Action("LoadSachTheoDanhMuc","UserHome",new {CageID=CategoryGroup.Key.CategoryID})" class="submenu"><i class="fa fa-angle-right"></i> @CategoryGroup.Key.CategoryName</a>
+                    <ul id="TacGia">
+                        @foreach (var AuthorGroup in CategoryGroup.GroupBy(author => author.Author))
+                        {
+                            <li><a href="@Url.Action("LoadSachTheoDanhMucVaTacGia","UserHome",new {CageID=CategoryGroup.Key.CategoryID, AuthorID=AuthorGroup.Key.AuthorID })">@AuthorGroup.Key.AuthorName</a></li>
+                        }
 
 
-        @foreach (var item in Model)
-        {
-            <li><a href="@Url.Action("LoadSachTheoDanhMuc","UserHome",new {CageID=item.CategoryID})">@item.CategoryName</a></li>
-        }
+                    </ul>
+                </li>
+            }
 
 
-
-    </ul>
+        </ul>
 </div>
+<style>
+    #DanhMucSach:hover #TacGia{
+        display:block;
+    }
+</style>

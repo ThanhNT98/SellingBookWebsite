@@ -1,35 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="BookShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Book">
-    <Key>
-      <PropertyRef Name="BookID" />
-    </Key>
-    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PublishDate" Type="DateTime" Precision="3" />
-    <Property Name="Price" Type="Double" />
-    <Property Name="Quantity" Type="Int32" />
-    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CategoryId" Type="Int32" Nullable="false" />
-    <Property Name="isDelete" Type="Boolean" />
-    <NavigationProperty Name="Category" Relationship="Self.FK_Book_Category" FromRole="Book" ToRole="Category" />
-    <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Book" FromRole="Book" ToRole="Cart" />
-  </EntityType>
   <EntityType Name="Cart">
     <Key>
       <PropertyRef Name="CartID" />
     </Key>
     <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="BookID" Type="Int32" />
-    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Price" Type="Double" />
     <Property Name="DDH_ID" Type="Int32" />
-    <NavigationProperty Name="Book" Relationship="Self.FK_Cart_Book" FromRole="Cart" ToRole="Book" />
     <NavigationProperty Name="DonDatHang" Relationship="Self.FK_Cart_DonDatHang" FromRole="Cart" ToRole="DonDatHang" />
+    <NavigationProperty Name="Book" Relationship="BookShopModel.FK_Cart_Book" FromRole="Cart" ToRole="Book" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -37,7 +19,7 @@
     </Key>
     <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Books" Relationship="Self.FK_Book_Category" FromRole="Category" ToRole="Book" />
+    <NavigationProperty Name="Books" Relationship="BookShopModel.FK_Book_Category" FromRole="Category" ToRole="Book" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -76,30 +58,6 @@
     <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Book_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="1" />
-    <End Role="Book" Type="Self.Book" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="CategoryID" />
-      </Principal>
-      <Dependent Role="Book">
-        <PropertyRef Name="CategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Cart_Book">
-    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
-    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Book">
-        <PropertyRef Name="BookID" />
-      </Principal>
-      <Dependent Role="Cart">
-        <PropertyRef Name="BookID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Cart_DonDatHang">
     <End Role="DonDatHang" Type="Self.DonDatHang" Multiplicity="0..1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
@@ -125,20 +83,11 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="BookShopEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Books" EntityType="Self.Book" />
     <EntitySet Name="Carts" EntityType="Self.Cart" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="DonDatHangs" EntityType="Self.DonDatHang" />
     <EntitySet Name="Payments" EntityType="Self.Payment" />
-    <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
-      <End Role="Category" EntitySet="Categories" />
-      <End Role="Book" EntitySet="Books" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Cart_Book" Association="Self.FK_Cart_Book">
-      <End Role="Book" EntitySet="Books" />
-      <End Role="Cart" EntitySet="Carts" />
-    </AssociationSet>
     <AssociationSet Name="FK_Cart_DonDatHang" Association="Self.FK_Cart_DonDatHang">
       <End Role="DonDatHang" EntitySet="DonDatHangs" />
       <End Role="Cart" EntitySet="Carts" />
@@ -147,5 +96,83 @@
       <End Role="Customer" EntitySet="Customers" />
       <End Role="DonDatHang" EntitySet="DonDatHangs" />
     </AssociationSet>
+    <EntitySet Name="Authors" EntityType="BookShopModel.Author" />
+    <EntitySet Name="Books" EntityType="BookShopModel.Book" />
+    <AssociationSet Name="FK_Book_Author" Association="BookShopModel.FK_Book_Author">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Category" Association="BookShopModel.FK_Book_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_Book" Association="BookShopModel.FK_Cart_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="BookShopModel.FK_Book_Author" FromRole="Author" ToRole="Book" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PublishDate" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="isDelete" Type="Boolean" />
+    <Property Name="AuthorID" Type="Int32" />
+    <NavigationProperty Name="Author" Relationship="BookShopModel.FK_Book_Author" FromRole="Book" ToRole="Author" />
+    <NavigationProperty Name="Category" Relationship="BookShopModel.FK_Book_Category" FromRole="Book" ToRole="Category" />
+    <NavigationProperty Name="Carts" Relationship="BookShopModel.FK_Cart_Book" FromRole="Book" ToRole="Cart" />
+  </EntityType>
+  <Association Name="FK_Book_Author">
+    <End Type="BookShopModel.Author" Role="Author" Multiplicity="0..1" />
+    <End Type="BookShopModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Category">
+    <End Type="BookShopModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="BookShopModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_Book">
+    <End Type="BookShopModel.Book" Role="Book" Multiplicity="0..1" />
+    <End Type="BookShopModel.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

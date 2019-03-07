@@ -12,29 +12,19 @@ namespace WebsiteBanSach.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Book
+    public partial class Author
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Book()
+        public Author()
         {
-            this.Carts = new HashSet<Cart>();
+            this.Books = new HashSet<Book>();
         }
     
-        public int BookID { get; set; }
-        public string BookName { get; set; }
-        public string Publisher { get; set; }
-        public Nullable<System.DateTime> PublishDate { get; set; }
-        public Nullable<double> Price { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public string Image { get; set; }
+        public int AuthorID { get; set; }
+        public string AuthorName { get; set; }
         public string Description { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public Nullable<bool> isDelete { get; set; }
-        public Nullable<int> AuthorID { get; set; }
     
-        public virtual Author Author { get; set; }
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

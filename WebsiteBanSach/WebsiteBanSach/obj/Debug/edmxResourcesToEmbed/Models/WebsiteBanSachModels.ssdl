@@ -1,20 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="BookShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuthorName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="Book">
     <Key>
       <PropertyRef Name="BookID" />
     </Key>
     <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BookName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Author" Type="nvarchar" MaxLength="50" />
     <Property Name="Publisher" Type="nvarchar" MaxLength="50" />
     <Property Name="PublishDate" Type="datetime" />
     <Property Name="Price" Type="float" />
     <Property Name="Quantity" Type="int" />
     <Property Name="Image" Type="nvarchar" MaxLength="500" />
     <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" />
     <Property Name="isDelete" Type="bit" />
+    <Property Name="AuthorID" Type="int" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
@@ -22,7 +30,7 @@
     </Key>
     <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BookID" Type="int" />
-    <Property Name="BookName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookName" Type="nvarchar" MaxLength="50" />
     <Property Name="Quantity" Type="int" />
     <Property Name="Price" Type="float" />
     <Property Name="DDH_ID" Type="int" />
@@ -68,8 +76,20 @@
     <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PaymentType" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Book_Author">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Book_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Book" Type="Self.Book" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
@@ -117,12 +137,17 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="BookShopModelStoreContainer">
+    <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DonDatHang" EntityType="Self.DonDatHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Book_Author" Association="Self.FK_Book_Author">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
     <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Book" EntitySet="Book" />

@@ -1,0 +1,162 @@
+﻿
+
+
+
+@using WebsiteBanSach.Models
+
+
+@{
+    ViewBag.Title = "LoadSachTheoDanhMucVaTacGia";
+    Layout = "~/Views/Layout/MainUserLayout.cshtml";
+}
+<!-- ajax -->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div class="row store-items">
+    @{ 
+        Author TacGia = (Author)ViewBag.ThongTinTacGia;
+    }
+    <h2 style="color:darkslateblue; font-weight:500">Tác Giả: @TacGia.AuthorName</h2>
+    <div style="font-family:'Bookman Old Style'">
+        @TacGia.Description
+    </div>
+    <hr />
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+            <div class="store-item">
+                <div class="store-item-rating text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <div class="store-item-image">
+                    <a href="@Url.Action("XemChiTietSach","UserHome",new {BookID=item.BookID, AuthorName=TacGia.AuthorName})">
+                        <img src="@Url.Content("~/Content/HinhAnhSach/"+item.Image)" alt="not found" class="img-responsive" style="width:400px; height:300px;">
+                    </a>
+                </div>
+                <div class="store-item-info clearfix">
+                    <span class="store-item-price themed-color-dark pull-right">@item.Price.ToString("#,##") VNĐ</span>
+                    <a href="@Url.Action("XemChiTietSach","UserHome",new {BookID=item.BookID, AuthorName=TacGia.AuthorName})">
+                        <strong>@item.BookName</strong>
+                    </a><br>
+                    @*Nút thêm vào giỏ hàng; request.url: lấy đường dẫn hiện tại*@
+                    <small><i class="fa fa-shopping-cart text-muted"></i>  @Ajax.ActionLink("Thêm vào giỏ hàng", "ThemGioHangAjax", "GioHang", new { @_BookID = item.BookID, @urlPath = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "get", UpdateTargetId = "divGioHang", InsertionMode = InsertionMode.Replace }, new { @class = "text-muted" })</small>
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+    @*<div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+            <div class="store-item">
+                <div class="store-item-rating text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <div class="store-item-image">
+                    <a href="ecom_product.html">
+                        <img src="img/placeholders/photos/photo28.jpg" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div class="store-item-info clearfix">
+                    <span class="store-item-price themed-color-dark pull-right">$ 59</span>
+                    <a href="ecom_product.html"><strong>Gloves</strong></a><br>
+                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+            <div class="store-item">
+                <div class="store-item-rating text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <div class="store-item-image">
+                    <a href="ecom_product.html">
+                        <img src="img/placeholders/photos/photo30.jpg" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div class="store-item-info clearfix">
+                    <span class="store-item-price themed-color-dark pull-right">$ 99</span>
+                    <a href="ecom_product.html"><strong>Jacket</strong></a><br>
+                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+            <div class="store-item">
+                <div class="store-item-rating text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <div class="store-item-image">
+                    <a href="ecom_product.html">
+                        <img src="img/placeholders/photos/photo32.jpg" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div class="store-item-info clearfix">
+                    <span class="store-item-price themed-color-dark pull-right">$ 79</span>
+                    <a href="ecom_product.html"><strong>Headset</strong></a><br>
+                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+            <div class="store-item">
+                <div class="store-item-rating text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <div class="store-item-image">
+                    <a href="ecom_product.html">
+                        <img src="img/placeholders/photos/photo35.jpg" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div class="store-item-info clearfix">
+                    <span class="store-item-price themed-color-dark pull-right">$ 1.599</span>
+                    <a href="ecom_product.html"><strong>Laptop</strong></a><br>
+                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+            <div class="store-item">
+                <div class="store-item-rating text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <div class="store-item-image">
+                    <a href="ecom_product.html">
+                        <img src="img/placeholders/photos/photo33.jpg" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div class="store-item-info clearfix">
+                    <span class="store-item-price themed-color-dark pull-right">$ 149</span>
+                    <a href="ecom_product.html"><strong>Sunglasses</strong></a><br>
+                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
+                </div>
+            </div>
+        </div>*@
+</div>
+
+
+

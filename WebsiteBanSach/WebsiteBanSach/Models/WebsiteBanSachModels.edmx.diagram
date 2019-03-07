@@ -5,16 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ab0cac72ac284b2eaba865d330085551" Name="Diagram1">
-        <EntityTypeShape EntityType="BookShopModel.Book" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BookShopModel.Cart" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BookShopModel.Category" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BookShopModel.Customer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="BookShopModel.DonDatHang" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="BookShopModel.Payment" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="BookShopModel.FK_Book_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="BookShopModel.FK_Cart_Book" ManuallyRouted="false" />
         <AssociationConnector Association="BookShopModel.FK_Cart_DonDatHang" ManuallyRouted="false" />
         <AssociationConnector Association="BookShopModel.FK_DonDatHang_Customer" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BookShopModel.Author" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="BookShopModel.Book" Width="1.5" PointX="3" PointY="5.25" />
+        <AssociationConnector Association="BookShopModel.FK_Book_Author" />
+        <AssociationConnector Association="BookShopModel.FK_Book_Category" />
+        <AssociationConnector Association="BookShopModel.FK_Cart_Book" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
