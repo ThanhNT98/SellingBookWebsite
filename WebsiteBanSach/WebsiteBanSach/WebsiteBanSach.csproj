@@ -1103,7 +1103,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Layout\MainUserLayout.cshtml" />
-    <Content Include="Views\UserHome\Index.cshtml" />
     <Content Include="Views\UserHome\LoadDanhMucSach.cshtml" />
     <Content Include="Views\UserHome\LoadSachTheoDanhMuc.cshtml" />
     <Content Include="Views\UserHome\XemChiTietSach.cshtml" />
@@ -1115,6 +1114,9 @@
     <Content Include="Views\GioHang\ThongBao.cshtml" />
     <Content Include="Views\GioHang\EditGioHang.cshtml" />
     <Content Include="Views\UserHome\LoadSachTheoDanhMucVaTacGia.cshtml" />
+    <Content Include="Views\Layout\UserIndexLayout.cshtml" />
+    <Content Include="Views\UserHome\Index.cshtml" />
+    <Content Include="Views\UserHome\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

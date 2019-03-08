@@ -2,145 +2,111 @@
 @model IEnumerable<Book>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Layout/MainUserLayout.cshtml";
+    Layout = "~/Views/Layout/UserIndexLayout.cshtml";
 }
 
-<div class="row store-items">
+<div id="home-carousel" class="carousel carousel-home slide" data-ride="carousel" data-interval="5000">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        @for (int i = 0; i < 5; i++)
+        {
+            if (i == 0)
+            {
+                <div class="active item">
+                    <section class="site-section site-section-light site-section-top themed-background-dark-default">
+                        <div class="container">
+                            <h1 class="text-center animation-slideDown hidden-xs"><strong>Sách HOT Trong Tuần</strong></h1>
+                            <h2 class="text-center animation-slideUp push hidden-xs">Đừng bỏ lỡ cơ hội sở hữu những cuốn sách đang làm mưa làm gió hiện nay!</h2>
+                            <p class="text-center animation-fadeIn">
+                                <img src="@Url.Content("~/Content/HinhAnhSach/"+Model.ElementAt(i).Image)" alt="Promo Image 1" style="width:400px; height:450px;">
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            }
+            else
+            {
+                <div class="item">
+                    <section class="site-section site-section-light site-section-top themed-background-dark-default">
+                        <div class="container">
+                            <h1 class="text-center animation-slideDown hidden-xs"><strong>Sách HOT Trong Tuần</strong></h1>
+                            <h2 class="text-center animation-slideUp push hidden-xs">Đừng bỏ lỡ cơ hội sở hữu những cuốn sách đang làm mưa làm gió hiện nay!</h2>
+                            <p class="text-center animation-fadeIn">
+                                <img src="@Url.Content("~/Content/HinhAnhSach/"+Model.ElementAt(i).Image)" alt="Promo Image 1" style="width:400px; height:450px;">
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            }
 
-    @foreach (var item in Model)
-    {
-        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-            <div class="store-item">
-                <div class="store-item-rating text-warning">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                </div>
-                <div class="store-item-image">
-                    <a href="@Url.Action("XemChiTietSach","UserHome",new {BookID=item.BookID})">
-                        <img src="@Url.Content("~/Content/HinhAnhSach/"+item.Image)" alt="not found" class="img-responsive" style="width:400px; height:300px;">
-                    </a>
-                </div>
-                <div class="store-item-info clearfix">
-                    <span class="store-item-price themed-color-dark pull-right">@item.Price.Value.ToString("#,##") VNĐ</span>
-                    <a href="@Url.Action("XemChiTietSach","UserHome",new {BookID=item.BookID})">
-                        <strong>@item.BookName</strong>
-                    </a><br>
-                    @*Nút thêm vào giỏ hàng; request.url: lấy đường dẫn hiện tại*@
-                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="@Url.Action("ThemGioHang","GioHang",new {@_BookID=item.BookID,@urlPath=Request.Url.ToString()})" class="text-muted">Add to cart</a></small>
-                </div>
-            </div>
-        </div>
-    }
+        }
 
-
-    @*<div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-            <div class="store-item">
-                <div class="store-item-rating text-warning">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                </div>
-                <div class="store-item-image">
-                    <a href="ecom_product.html">
-                        <img src="img/placeholders/photos/photo28.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="store-item-info clearfix">
-                    <span class="store-item-price themed-color-dark pull-right">$ 59</span>
-                    <a href="ecom_product.html"><strong>Gloves</strong></a><br>
-                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-            <div class="store-item">
-                <div class="store-item-rating text-warning">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                </div>
-                <div class="store-item-image">
-                    <a href="ecom_product.html">
-                        <img src="img/placeholders/photos/photo30.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="store-item-info clearfix">
-                    <span class="store-item-price themed-color-dark pull-right">$ 99</span>
-                    <a href="ecom_product.html"><strong>Jacket</strong></a><br>
-                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-            <div class="store-item">
-                <div class="store-item-rating text-warning">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                </div>
-                <div class="store-item-image">
-                    <a href="ecom_product.html">
-                        <img src="img/placeholders/photos/photo32.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="store-item-info clearfix">
-                    <span class="store-item-price themed-color-dark pull-right">$ 79</span>
-                    <a href="ecom_product.html"><strong>Headset</strong></a><br>
-                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-            <div class="store-item">
-                <div class="store-item-rating text-warning">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                </div>
-                <div class="store-item-image">
-                    <a href="ecom_product.html">
-                        <img src="img/placeholders/photos/photo35.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="store-item-info clearfix">
-                    <span class="store-item-price themed-color-dark pull-right">$ 1.599</span>
-                    <a href="ecom_product.html"><strong>Laptop</strong></a><br>
-                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-            <div class="store-item">
-                <div class="store-item-rating text-warning">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                </div>
-                <div class="store-item-image">
-                    <a href="ecom_product.html">
-                        <img src="img/placeholders/photos/photo33.jpg" alt="" class="img-responsive">
-                    </a>
-                </div>
-                <div class="store-item-info clearfix">
-                    <span class="store-item-price themed-color-dark pull-right">$ 149</span>
-                    <a href="ecom_product.html"><strong>Sunglasses</strong></a><br>
-                    <small><i class="fa fa-shopping-cart text-muted"></i> <a href="javascript:void(0)" class="text-muted">Add to cart</a></small>
-                </div>
-            </div>
-        </div>*@
+    </div>
+    <!-- END Wrapper for slides -->
+    <!-- Controls -->
+    <a class="left carousel-control" href="#home-carousel" data-slide="prev">
+        <span>
+            <i class="fa fa-chevron-left"></i>
+        </span>
+    </a>
+    <a class="right carousel-control" href="#home-carousel" data-slide="next">
+        <span>
+            <i class="fa fa-chevron-right"></i>
+        </span>
+    </a>
+    <!-- END Controls -->
 </div>
+<!-- END Home Carousel -->
+<!-- Action -->
+<section class="site-content site-section">
+    <div class="container">
+        <div class="site-block text-center">
+            <a href="#" class="btn btn-lg btn-success"><i class="fa fa-shopping-cart"></i> Sách Bán Chạy Trong Tuần</a>
 
+        </div>
+        <hr>
+    </div>
+</section>
+
+<!-- Promo #1 -->
+@for (int i = 0; i < 5; i++)
+{
+    if (i % 2 == 0)
+    {
+        <section class="site-content site-section site-slide-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 site-block visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInRight" data-element-offset="-180">
+                        <img src="@Url.Content("~/Content/HinhAnhSach/"+Model.ElementAt(i).Image)" alt="Promo #1" class="img-responsive" style="width:400px; height:450px;">
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-md-offset-1 site-block visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInLeft" data-element-offset="-180">
+                        <h3 class="h2 site-heading site-heading-promo"><strong>@Model.ElementAt(i).BookName</strong></h3>
+                        <p class="promo-content">@Model.ElementAt(i).Description.Substring(0, 300) [...] <a href="features.html">Xem chi tiết...</a></p>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </section>
+        <!-- END Promo #1 -->
+    }
+    else
+    {
+        <!-- Promo #2 -->
+        <section class="site-content site-section site-slide-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-5 site-block visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInRight" data-element-offset="-180">
+                        <h3 class="h2 site-heading site-heading-promo"><strong>@Model.ElementAt(i).BookName</strong></h3>
+                        <p class="promo-content">@Model.ElementAt(i).Description.Substring(0, 300) [...] <a href="features.html">Xem chi tiết...</a></p>
+                    </div>
+                    <div class="col-sm-6 col-md-offset-1 site-block visibility-none" data-toggle="animation-appear" data-animation-class="animation-fadeInLeft" data-element-offset="-180">
+                        <img src="@Url.Content("~/Content/HinhAnhSach/"+Model.ElementAt(i).Image)" alt="Promo #2" class="img-responsive" style="width:400px; height:450px;">
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </section>
+        <!-- END Promo #2 -->
+    }
+}
 

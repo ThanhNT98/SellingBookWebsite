@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using PagedList;
@@ -12,15 +13,30 @@ namespace WebsiteBanSach.Controllers
         // GET: UserHome
         public ActionResult Index()
         {
-            int CageID = 1;
-            var ListSach = db.Books.Where(s => s.CategoryId == CageID && s.isDelete == false);
-            if (ListSach == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(ListSach);
             
+            //lấy sách bán chạy
+            string sql= "select * " +
+                        "from Book " +
+                        "where Book.BookID in (select BookID " +
+                                              "from(Select top(5) c.BookID, SUM(c.Quantity) as sumQuantity " +
+                                                      "from Cart as c  , dbo.DonDatHang as ddh " +
+                                                      "where c.DDH_ID = ddh.DDH_ID and ddh.OrderDate <= GETDATE() and ddh.OrderDate >= (GETDATE() - 7) and ddh.isDelivered = 'true' " +
+                                                      "group by BookID " +
+                                                      "order by(sumQuantity) DESC " +
+                                                      ")a  " +
+                                               ") ";
+
+
+
+            List<Book> BookIDList = db.Database.SqlQuery<Book>(sql).ToList();
+            
+            return View(BookIDList);
+
+        }
+
+        public ActionResult Test()
+        {
+            return View();
         }
         //menu: danh mục >> tác giả>>sách của tác giả
         public ActionResult LoadDanhMucSach(int? CageID)
